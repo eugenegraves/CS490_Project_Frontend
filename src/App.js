@@ -582,11 +582,11 @@ const Checkout = () => {
       const response3 = await fetch(`http://localhost:5000/checkout/${customer_id}`, {
         method: 'DELETE'
       });
+      console.log(response3.data)
 
     } catch (error) {
       console.error('Error fetching cart items or removing them:', error);
     }
-    console.log(response3.data)
 
     console.log("Form is valid, processing payment...");
     navigate('/checkoutSuccess', { state: { userData,customerSignature,allCars } });
@@ -723,8 +723,7 @@ const Homepage = () => {
     if (data.cars.length === 0) {
       alert("Sorry, no cars found with those filters")  // if no cars found, show this
       handleSearch({ make: '', model: '', color: '', budget: '' });
-    } else {
-      setMessage('');   // if cars found after error message, set error message to blank
+    } else {   // if cars found after error message, set error message to blank
     }
   };
 
