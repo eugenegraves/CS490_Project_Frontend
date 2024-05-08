@@ -42,7 +42,7 @@ export default function CarDetails() {
         };
         fetchCar();
 
-    }, []);
+    }, [car_id]);
     //end
 
     //Function to switch the main image onclick
@@ -54,7 +54,7 @@ export default function CarDetails() {
 
     //highlight the image currently displayed in the main frame
     const highlight = (image) => {
-        return actualImage == image ? { border: "2px solid white" } : {};
+        return actualImage === image ? { border: "2px solid white" } : {};
     };
     //end
     
