@@ -2115,7 +2115,7 @@ const CarAccessories = () => {
 
  /* const handleAddAccessoryButton = () => {
     setShowAddAccessoryModal(true);
-  };/*
+  };*/
 
   const handleAddAccessoryModalClose = () => {
     setShowAddAccessoryModal(false);
