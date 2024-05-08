@@ -61,7 +61,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Homepage />} />
               <Route path="/login" element={<Login setIsSignedIn={setIsSignedIn}/>} />
-              <Route path="/Roles_login" element={<Roles_login />} />
+              <Route path="/RolesLogin" element={<RolesLogin />} />
               <Route path="/homepage" element={<SignedInHomepage setIsSignedIn={setIsSignedIn} />} />
               <Route path="/tech" element={<Technician />} />
               <Route path="/admin" element={<Admin />} />
@@ -80,7 +80,7 @@ function App() {
               <Route path="ContactPage" element={<ContactPage setIsSignedIn={setIsSignedIn}/>} />
               <Route path="TestDriveHistory" element={<TestDriveHistory/>} />
               <Route path="makeOffer" element={<MakeOffer/>} />
-              <Route path="/contract" element={<Contract_View />} />
+              <Route path="/contract" element={<ContractView />} />
               <Route path="/customerManageOffers" element={<ManageOffers/>} />
               <Route path="/managerManageOffers" element={<ManageOffersManager/>} />
               <Route path='/carDetails/financeApplication/*' element={<FinanceApp />}></Route>
@@ -100,13 +100,12 @@ function App() {
 
 // contact page that displays the email and phone number as text fields to the user
 const ContactPage = ({setIsSignedIn}) => {
-  const location = useLocation();
   const [showDashboardOptions, setShowDashboardOptions] = useState(false);
   const storedData = sessionStorage?.getItem('data');
   const userData = JSON.parse(storedData);
   const customer_id = userData?.['customer_id'];
   console.log("customer    ", customer_id);
-  const [isLoggedIn, setIsLoggedIn] = useState(customer_id != null);
+  const [isLoggedIn] = useState(customer_id != null);
   const navigate = useNavigate();
 
 
@@ -433,7 +432,6 @@ const CheckoutSuccess = () => {
   const customerSignature = location.state?.customerSignature;
   const allCars = location.state?.allCars;
   const userData = location.state?.userData;
-  const navigate = useNavigate();
 
   const userEmail = userData.email;
   console.log("dfghjkl",userEmail);
@@ -1128,7 +1126,7 @@ const SignedInHomepage = ({setIsSignedIn}) => {
 
 
 
-const Contract_View = () => {
+const ContractView = () => {
   const location = useLocation();
   const userData = location.state?.userData;
   const navigate = useNavigate();
@@ -2757,7 +2755,7 @@ const Login = ({setIsSignedIn}) => {
           <button className="login-button" type="submit">Login</button>
           {EditMessage && <p> {EditMessage}</p>}
         </form>
-        <Button as={Link} to="/Roles_login" style={{ padding: '10px 20px', backgroundColor: 'black', color: '#fff', border: '1px solid black', borderRadius: '3px', cursor: 'pointer' }} marginLeft="600px">Adminstration login</Button>
+        <Button as={Link} to="/RolesLogin" style={{ padding: '10px 20px', backgroundColor: 'black', color: '#fff', border: '1px solid black', borderRadius: '3px', cursor: 'pointer' }} marginLeft="600px">Adminstration login</Button>
         <button onClick={handleCreateCustomerClick} style={{ padding: '10px 20px', backgroundColor: 'black', color: '#fff', border: '1px solid black', borderRadius: '3px', cursor: 'pointer' }}>
           {showCreateCustomerForm ? 'Cancel' : 'Sign-Up Instead?'}
         </button>
@@ -2807,7 +2805,7 @@ const Login = ({setIsSignedIn}) => {
   );
 };
 
-const Roles_login = () => {
+const RolesLogin = () => {
 
   const [role, setRole] = useState('');
   const navigate = useNavigate();

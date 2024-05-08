@@ -160,7 +160,7 @@ export default function Addons(){
      const RemovePackage =(packageInfos) =>{
       //console.log("packinfos" ,packageInfos) ;
       //console.log("remove" ,packageInfos.service_package_id) ;
-      setTotal((prev)=> prev - packageToAdd.filter(a=>a.service_package_id == packageInfos.service_package_id)[0].price);
+      setTotal((prev)=> prev - packageToAdd.filter(a=>a.service_package_id === packageInfos.service_package_id)[0].price);
       setPackageToAdd(packageToAdd.filter(a=>a.service_package_id !== packageInfos.service_package_id));
       //console.log(packageToAdd);
       setItemsCount((prev) => prev - 1);
