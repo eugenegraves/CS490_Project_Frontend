@@ -2748,22 +2748,22 @@ const RolesLogin = () => {
 
     try {
       let url = '';
-      let setData = null;
+      //let setData = null;
       let nextPage = '';
       switch (role) {
         case 'Manager':
           url = 'http://localhost:5000/login_managers';
-          setData = setManager;
+          //setData = setManager;
           nextPage = '/Manager';
           break;
         case 'Admin':
           url = 'http://localhost:5000/login_admin';
-          setData = setAdmin;
+          //setData = setAdmin;
           nextPage = '/admin';
           break;
         case 'Technicians':
           url = 'http://localhost:5000/login_technicians';
-          setData = setTech;
+          //setData = setTech;
           nextPage = '/tech';
           break;
         default:
