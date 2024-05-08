@@ -35,6 +35,7 @@
     "start-api": "cd api && venv/bin/flask run --no-debugger",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "npm test --passWithNoTests",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
