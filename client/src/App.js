@@ -1383,7 +1383,7 @@ const OwnCar = () => {
         if (response.ok) {
           console.log('car added');
           setFormData({ car_id: '', make: '', model: '' });
-
+          //test for push
           // Call the function to fetch and update customer cars
           fetchCustomerCars(userData.customer_id);
         } else {
