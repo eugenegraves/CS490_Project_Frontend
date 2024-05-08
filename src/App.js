@@ -450,7 +450,7 @@ const CheckoutSuccess = () => {
       .catch(error => {
         console.log('Error sending contract:', error);
       });
-  }, []);
+  }, [allCars, customerSignature, userData]);
   
   useEffect(() => {
     if (allCars.length > 0 ){
@@ -757,9 +757,9 @@ const Homepage = () => {
     rows.push(row);
   }
 
-  const headerHeight = 400; // Adjust this based on your actual header's height
-  const footerHeight = 100; // Adjust this based on your actual footer's height
-  const viewportHeight = window.innerHeight;
+  //const headerHeight = 400; // Adjust this based on your actual header's height
+  //const footerHeight = 100; // Adjust this based on your actual footer's height
+  //const viewportHeight = window.innerHeight;
   //const minContentHeight = `${viewportHeight - headerHeight - footerHeight}px`;
 
   return (
