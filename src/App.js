@@ -3066,9 +3066,9 @@ const Manager = () => {
     password: '',
     manager_id: userData?.manager
   });
-  const [removeCarFormData, setRemoveCarFormData] = useState({
+  /*const [removeCarFormData, setRemoveCarFormData] = useState({
     car_id: ''
-  });
+  });*/
   const [serviceRequests, setServiceRequests] = useState([]);
   const [testDriveRequests, setTestDriveRequests] = useState([]);
   const [error, setError] = useState(null);
@@ -3080,15 +3080,15 @@ const Manager = () => {
     category: "",
   });
   const [showAddMiscellaneous, setShowAddMiscellaneous] = useState(false);
-  const [accessoryID, setAccessoryID] = useState({
+  /*const [accessoryID, setAccessoryID] = useState({
     accessoire_id: '',
-  });
-  const [message, setMessage] = useState('');
+  });*/
+  const [message] = useState('');
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [accessories, setAccessories] = useState([]);
   const [carMakers, setCarMakers] = useState([]);
-  const [selectedMake, setSelectedMake] = useState("");
+  const [selectedMake] = useState("");
   const [carMakerDetails, setCarMakerDetails] = useState([]);
   // const [carModels, setCarModels] = useState([]);
   // const [selectedModel, setSelectedModel] = useState("");
@@ -3097,7 +3097,7 @@ const Manager = () => {
     if (showSalesReport) {
       getSalesReport()
     }
-  }, [showSalesReport]);
+  }, [showSalesReport, getSalesReport]);
 
   const getSalesReport = async () => {
     try{
@@ -3115,7 +3115,7 @@ const Manager = () => {
 
   useEffect(() => {
     getSalesReport();
-  }, []);
+  }, [getSalesReport]);
 
   useEffect(() => {
     if (salesReport.length > 0) {
@@ -3266,7 +3266,7 @@ const Manager = () => {
     });
   };
 
-  const handleSubmitRemoveCarForm = async (event) => {
+  /*const handleSubmitRemoveCarForm = async (event) => {
     event.preventDefault();
     const carId = parseInt(removeCarFormData.car_id);
     if (isNaN(carId)) {
@@ -3297,9 +3297,9 @@ const Manager = () => {
     }
     // Reset error state
     setError(null);
-  };
+  };*/
 
-  const handleSubmitMiscellaneousForm = async (event) => {
+  /*const handleSubmitMiscellaneousForm = async (event) => {
     event.preventDefault();
     const accessory_ID = parseInt(accessoryID.accessoire_id);
     if (isNaN(accessory_ID)) {
@@ -3331,7 +3331,7 @@ const Manager = () => {
     }
     // Reset error state
     setError(null);
-  };
+  };*/
 
   const handleAddMiscellaneous = async (event) => {
     event.preventDefault();
@@ -3382,13 +3382,13 @@ const Manager = () => {
   };
 
   // function that handles service appointment requests when the user clicks the button
-  const handleAppointmentRequests = () => {
-  };
+  /*const handleAppointmentRequests = () => {
+  };*/
 
   // when user clicks on create technician, show the relevant form immediately
-  const handleCreateTechnician = () => {
+  /*const handleCreateTechnician = () => {
     setShowTechnicianForm(true);
-  };
+  };*/
 
   // this is the function to add the service to the users cart when the service is accepted by a manager
   // const acceptService = e => {
