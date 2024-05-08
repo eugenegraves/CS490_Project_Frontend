@@ -3955,13 +3955,7 @@ const Manager = () => {
                   <td style={{textAlign: 'center', padding:'0px 0px 20px 0px'}}>{request.customer_username}</td>
                   <td style={{textAlign: 'center', padding:'0px 0px 20px 0px'}}>{request.customer_phone}</td>
                   <td style={{textAlign: 'center', padding:'0px 0px 20px 0px'}}>
-                  <Button colorScheme="green" onClick={() => {
-                      {
-                        handleAccept(request.service_request_id);
-                        acceptService(request.service_request_id);
-                      }
-                    }
-                  }> Accept</Button>
+                  <Button colorScheme="green" onClick={()=>{{handleAccept(request.service_request_id);acceptService(request.service_request_id);}}}> Accept</Button>
                   </td>
                   <td style={{textAlign: 'center', padding:'0px 0px 20px 0px'}}>
                     <Button colorScheme="red" onClick={() => handleDecline(request.service_request_id)}>
