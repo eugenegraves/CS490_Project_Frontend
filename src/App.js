@@ -1232,11 +1232,11 @@ const goBack = () => {
 
 const TestDriveHistory = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const userData = location.state?.userData;
   const [driveHistory, setDriveHistory] = useState([]);
 
-  const fetchTestDriveHistory = async () => {
+  const fetchTestDriveHistory = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:5000/test_drive_appointments/${userData.customer_id}`);
       if (!response.ok) {
@@ -1247,7 +1247,7 @@ const TestDriveHistory = () => {
     } catch (error) {
       console.error('Error fetching records:', error);
     }
-  };
+  }, [userData]);
 
   useEffect(() => {
     fetchTestDriveHistory();
@@ -1303,7 +1303,7 @@ const TestDriveHistory = () => {
 const OwnCar = () => {
   const [formData, setFormData] = useState({ car_id: '', make: '', model: '' });
   const [customerCars, setCustomerCars] = useState([]);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const location = useLocation();
   const [EditMessage, setEditMessage] = useState('');
   const userData = location.state?.userData;
@@ -1489,7 +1489,7 @@ const ServiceHistory = () => {
   const [serviceHistory, setServiceHistory] = useState([]);
 
 
-  const fetchServiceHistory = async () => {
+  const fetchServiceHistory = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:5000/customer_service_requests/${userData.customer_id}`);
       const data = await response.json();
@@ -1497,13 +1497,13 @@ const ServiceHistory = () => {
     } catch (error) {
       console.error('Error fetching service history:', error);
     }
-  };
+  }, [userData]);
 
   useEffect(() => {
     fetchServiceHistory();
   }, [userData, fetchServiceHistory]);
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   return (
     <>
@@ -1575,7 +1575,7 @@ const CustomerCart = () => {
 
   console.log("The State of the Cart", location.state);
 
-  const fetchCartItems = async (customerId) => {
+  const fetchCartItems = useCallback(async (customerId) => {
     try {
       const response = await fetch(`http://localhost:5000/get_cart_items/${customerId}`);
       if (!response.ok) {
@@ -1592,7 +1592,7 @@ const CustomerCart = () => {
     } catch (error) {
       console.error('Error fetching cart items:', error);
     }
-  };
+  }, [userData]);
 
   useEffect(() => {
     fetchCartItems(userData?.customer_id);
@@ -1718,7 +1718,7 @@ const handleCheckout = () => {
 //CustomerSerivceAppointment
 
 const CustomerSerivceAppointment = () => {
-  const navigate = useNavigate();
+  ///const navigate = useNavigate();
   const location = useLocation();
   const userData = location.state?.userData;
   const [EditMessage, setEditMessage] = useState('');
@@ -1907,7 +1907,7 @@ const CustomerSerivceAppointment = () => {
 const PastPurchase = () => {
   const location = useLocation();
   const userData = location.state?.userData;
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const [itemsSold, setItemsSold] = useState([]);
 
   useEffect(() => {
@@ -2191,7 +2191,7 @@ const CarAccessories = () => {
     handleAddToCart();
   }, [cartData]);
 
-  const navigate = useNavigate();  
+  //const navigate = useNavigate();  
 
   /*const handleNavigate = (path) => {
       navigate(path, { state: { userData } });
