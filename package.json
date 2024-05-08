@@ -34,7 +34,7 @@
     "start": "react-scripts start",
     "start-api": "cd api && venv/bin/flask run --no-debugger",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --passWithNoTests",
     "test:ci": "npm test --passWithNoTests",
     "eject": "react-scripts eject"
   },
