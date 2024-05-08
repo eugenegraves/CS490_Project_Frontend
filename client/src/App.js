@@ -1187,6 +1187,30 @@ const Contract_View = () => {
     return dateString2;
   };
 
+  const getPaymentHistory = () => {
+    const contract = contracts[currentContract];
+    const contractDate = new Date(contract.contract_date);
+    const today = new Date();
+
+    // Calculate the number of months passed since the contract date (including current month)
+    const monthsPassed = today.getMonth() - contractDate.getMonth() + (today.getFullYear() - contractDate.getFullYear()) * 12 + 1;
+
+    // Create an empty array to store payment history objects
+    const paymentHistory = [];
+
+    // Loop through the number of months passed and create fake payment data
+    for (let i = 0; i < Math.min(monthsPassed, 2); i++) { // Limit history to 2 months
+      const paymentDate = new Date(contractDate.getFullYear(), contractDate.getMonth() + i, contractDate.getDate());
+      paymentHistory.push({
+        paymentMethod: "bank account",
+        paymentDate: paymentDate.toLocaleDateString(),
+        amount: contract.monthly_payment_amount,
+      });
+    }
+
+    return paymentHistory;
+  };
+
 const Pdf = (index) => {
   setCurrentContract(index);
   setViewerOn(true);
@@ -1244,6 +1268,7 @@ const goBack = () => {
       </PDFViewer>
       <br></br>
       <br></br>
+      <h2>Congratulations {userData.first_name}, you are up to date on your monthly payments!</h2>
     </div>
   )}
 </div>
