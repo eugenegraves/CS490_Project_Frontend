@@ -2782,7 +2782,7 @@ const RolesLogin = () => {
       const data = await response.json();
       if (response.ok) {
         console.log('Login successful:', data);
-        setData(data);
+        //setData(data);
         navigate(nextPage, { state: { userData: data } });
       } else {
         console.error('Login failed:', data.error);
