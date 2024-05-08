@@ -11,21 +11,22 @@ export default function ManageOffersManager(){
     const navigate = useNavigate();
  
    
-    const fetchOffers =()=>{
-    axios.post('/fetchOffersManager',{category} )
-    .then( (response) =>{
-        setFetchedData(response.data);
-        // console.log("data fetched", response.data)
-    }
-    )
-    .catch(error=>{
-        console.log("error message", error)
-       window.confirm('Something went wrong, please try again !');
-    });
-} 
+    const fetchOffers = useCallback(async () =>{
+        axios.post('/fetchOffersManager',{category} )
+        .then( (response) =>{
+            setFetchedData(response.data);
+            // console.log("data fetched", response.data)
+        }
+        )
+        .catch(error=>{
+            console.log("error message", error)
+        window.confirm('Something went wrong, please try again !');
+        });
+    }, [category]);
+
     useEffect(()=>{
         fetchOffers();
-}, [category,status, fetchOffers]);
+    }, [ fetchOffers ]);
 
 const acceptOffer =(customer_id,offer_id,car_id,offer_price,car_name,car_image)=>{
     axios.post('/acceptOffer',{customer_id,offer_id,car_id,offer_price,car_name,car_image} )
