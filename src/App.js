@@ -1,5 +1,5 @@
 // import necessary libraries
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, createContext, useCallback } from 'react';
 import Tilt from 'react-vanilla-tilt';
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
@@ -4432,7 +4432,7 @@ const Technician = () => {
   
   useEffect(() => {
     if (showAssignedServices) {
-      fetchAssignedServices();
+      fetchAssignedService();
     }
   }, [showAssignedServices, fetchAssignedServices]);
 
@@ -4498,7 +4498,7 @@ const sendSubmitReport = (reportValue, statusValue, service_request_id ,assigned
     window.alert('Failed to save feedback. Please try again later.');
   });
 };
-  const fetchAssignedServices = () => {
+  const fetchAssignedServices = useCallback(async () => {
     axios.get(`http://localhost:5000/show_assigned_services/${userData.technicians_id}`)
       .then(response => {
         console.log(response.data); 
@@ -4507,7 +4507,8 @@ const sendSubmitReport = (reportValue, statusValue, service_request_id ,assigned
       .catch(error => {
         console.error('Error fetching assigned services:', error);
       });
-  };
+  }, [userData.technicians_id]);
+
   const handleSignOut = () => {
     localStorage.removeItem('accessToken');
     navigate('/', { replace: true });
