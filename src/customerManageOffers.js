@@ -34,6 +34,7 @@ const acceptOffer =(customer_id,offer_id,car_id,offer_price,car_name,car_image)=
     axios.post('http://localhost:5000/acceptOffer',{customer_id,offer_id,car_id,offer_price,car_name,car_image} )
     .then( (response) =>{
         setStatus((prev)=>!prev);
+        console.log(status);
     }
     )
     .catch(error=>{
