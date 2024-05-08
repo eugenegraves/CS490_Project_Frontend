@@ -11,7 +11,7 @@ export default function ManageOffersManager(){
     const navigate = useNavigate();
  
    
-    const fetchOffers = useCallback(async () =>{
+    const fetchOffers = useCallback(async () => {
         axios.post('/fetchOffersManager',{category} )
         .then( (response) =>{
             setFetchedData(response.data);
