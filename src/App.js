@@ -2385,7 +2385,7 @@ const CustomerModifyInfo = ({setIsSignedIn}) => {
 
   useEffect(() => {
     fetchBankInfo();
-  }, [userData?.customer_id]);
+  }, [userData?.customer_id, fetchBankInfo]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
