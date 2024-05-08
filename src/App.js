@@ -4432,7 +4432,7 @@ const Technician = () => {
   
   useEffect(() => {
     if (showAssignedServices) {
-      fetchAssignedService();
+      fetchAssignedServices();
     }
   }, [showAssignedServices, fetchAssignedServices]);
 
