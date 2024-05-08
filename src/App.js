@@ -2730,11 +2730,10 @@ const Login = ({setIsSignedIn}) => {
 const RolesLogin = () => {
 
   const [role, setRole] = useState('');
-  const navigate = useNavigate();
+  const navigate = useNavigate();/*
   const [manager, setManager] = useState(null);
   const [admin, setAdmin] = useState(null);
-  const [tech, setTech] = useState(null);
-  const [EditMessage, setEditMessage] = useState('');
+  const [tech, setTech] = useState(null);*/
 
 
   const handleRoleSelection = (selectedRole) => {
@@ -2845,14 +2844,12 @@ const RolesLogin = () => {
 }
 
 // component to handle when the user clicks on "service appointment requests"
-const handleAppointmentRequests = () => {
+/*const handleAppointmentRequests = () => {
   console.log('Service appointment requests clicked');
-};
+};*/
 
 // component to handle when the user clicks on "add cars" button and selects a file
 const HandleAddCars = ({managerId}) => {
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   // parse the information from the file entered
   const parseFileContent = (fileContent) => {
@@ -2883,8 +2880,6 @@ const HandleAddCars = ({managerId}) => {
 
   // when user enters file, display filename 
   const handleFileInputChange = (event) => {
-    setErrorMessage(''); // Reset error message when file input changes
-    setSuccessMessage(''); // Reset success message when file input changes
     const file = event.target.files[0];
 
     if (file) {
@@ -2926,7 +2921,6 @@ const HandleAddCars = ({managerId}) => {
     })
     .catch(error => {
       console.error('Error:', error);
-      setErrorMessage('An error occurred. Please try again.');
     });
 };
 
