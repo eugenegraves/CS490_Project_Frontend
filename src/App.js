@@ -1575,10 +1575,6 @@ const CustomerCart = () => {
 
   console.log("The State of the Cart", location.state);
 
-  useEffect(() => {
-    fetchCartItems(userData?.customer_id);
-  }, [userData, fetchCartItems]);
-
   const fetchCartItems = async (customerId) => {
     try {
       const response = await fetch(`http://localhost:5000/get_cart_items/${customerId}`);
@@ -1597,6 +1593,11 @@ const CustomerCart = () => {
       console.error('Error fetching cart items:', error);
     }
   };
+
+  useEffect(() => {
+    fetchCartItems(userData?.customer_id);
+  }, [userData, fetchCartItems]);
+
 console.log("allcars", allCars);
   const calculateTotalPrice = (items) => {
     const total = items.reduce((acc, item) => acc + parseFloat(item.item_price), 0);
@@ -1633,9 +1634,9 @@ console.log("allcars", allCars);
     return  service_package_id ? { marginLeft:"30px"} : {};
 };
 
-const handleNavigate = (path) => {
+/*const handleNavigate = (path) => {
   navigate(path, { state: { userData } });
-};
+};*/
 
 const handleCheckout = () => {
   if(!customerSignature && allCars.length > 0){
@@ -1817,9 +1818,9 @@ const CustomerSerivceAppointment = () => {
     };
   };
 
-  const handleNavigate = (path) => {
+  /*const handleNavigate = (path) => {
     navigate(path, { state: { userData } });
-  };
+  };*/
 
   return (
     <>
@@ -1927,9 +1928,9 @@ const PastPurchase = () => {
     fetchItemsSold();
   }, [userData]);
 
-  const handleNavigate = (path) => {
+  /*const handleNavigate = (path) => {
     navigate(path, { state: { userData } });
-  };
+  };*/
 
   return (
     <>
@@ -2071,7 +2072,7 @@ const CarAccessories = () => {
     }
   };
 
-  const handleCart = async () =>{
+  /*const handleCart = async () =>{
     try {
       // Add logic to send accessoryData to backend and handle cart
       console.log("Accessory data:", cartData); // Log the cartData
@@ -2102,7 +2103,7 @@ const CarAccessories = () => {
       console.error('Error adding accessory:', error);
       // Handle error (e.g., display error message to the user)
     }
-  };
+  };*/
 
   const handleSelectChange = (event) => {
     setSelectedCategory(event.target.value);  
@@ -2112,9 +2113,9 @@ const CarAccessories = () => {
     fetchAccessories(selectedCategory);
   };
 
-  const handleAddAccessoryButton = () => {
+ /* const handleAddAccessoryButton = () => {
     setShowAddAccessoryModal(true);
-  };
+  };/*
 
   const handleAddAccessoryModalClose = () => {
     setShowAddAccessoryModal(false);
@@ -2192,9 +2193,9 @@ const CarAccessories = () => {
 
   const navigate = useNavigate();  
 
-  const handleNavigate = (path) => {
+  /*const handleNavigate = (path) => {
       navigate(path, { state: { userData } });
-  };
+  };*/
 
   useEffect(() => {
     // Fetch categories from the database
@@ -2339,13 +2340,13 @@ const CustomerModifyInfo = ({setIsSignedIn}) => {
   const userData = location.state?.userData;
   const navigate = useNavigate();
   const [EditMessage, setEditMessage] = useState('');
-  const [credit_score_Message, setscoreMessage] = useState('');
+  //const [credit_score_Message, setscoreMessage] = useState('');
   const [bankInfo, setBankInfo] = useState({
     bank_name: '',
     account_number: '',
     routing_number: '',
   });
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
 
   const handleSignOut = () => {
     sessionStorage.clear(); //remove data in session
@@ -2375,16 +2376,16 @@ const CustomerModifyInfo = ({setIsSignedIn}) => {
       console.log(data);
       const bankInfoData = data[0]; 
       setBankInfo(bankInfoData);
-      setLoading(false);
+      //setLoading(false);
     } catch (error) {
       console.error('Error:', error);
-      setLoading(false);
+      //setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchBankInfo();
-  }, [userData?.customer_id]);
+  }, [userData?.customer_id, fetchBankInfo]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -2433,9 +2434,9 @@ const CustomerModifyInfo = ({setIsSignedIn}) => {
     }
   };
 
-  const handleNavigate = (path) => {
+  /*const handleNavigate = (path) => {
     navigate(path, { state: { userData } });
-  };
+  };*/
 
   return (
     <>
@@ -2543,7 +2544,7 @@ const CustomerModifyInfo = ({setIsSignedIn}) => {
 
 
 const Login = ({setIsSignedIn}) => {
-  const [showCreateUserForm, setShowCreateUserForm] = useState(false);
+  //const [showCreateUserForm, setShowCreateUserForm] = useState(false);
   const [showCreateCustomerForm, setShowCreateCustomerForm] = useState(false);
   const [EditMessage, setEditMessage] = useState('');
   const navigate = useNavigate();
@@ -2552,7 +2553,7 @@ const Login = ({setIsSignedIn}) => {
 
   const handleCreateCustomerClick = () => {
     setShowCreateCustomerForm(!showCreateCustomerForm);
-    setShowCreateUserForm(false); // Hide the create user form if visible
+    //setShowCreateUserForm(false); // Hide the create user form if visible
   };
 
   const handleLoginSubmit = async (event) => {
@@ -2581,7 +2582,7 @@ const Login = ({setIsSignedIn}) => {
         setIsSignedIn(true);
         // Reset form state and collapse sign-up form
         setShowCreateCustomerForm(false);
-        setShowCreateUserForm(false);
+        //setShowCreateUserForm(false);
       } else {
         console.error('Login failed:', data.error);
         setEditMessage('Login failed');
@@ -2629,7 +2630,7 @@ const Login = ({setIsSignedIn}) => {
         }, 2000);
         // Reset form state and collapse sign-up form
         setShowCreateCustomerForm(false);
-        setShowCreateUserForm(false);
+        //setShowCreateUserForm(false);
       } else {
         console.error('Failed to add customer');
         setEditMessage('Customer was not created successfully');
