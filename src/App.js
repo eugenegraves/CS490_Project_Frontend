@@ -3105,7 +3105,7 @@ const Manager = () => {
     catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [salesReport]);
 
   useEffect(() => {
     if (showSalesReport) {
