@@ -26,7 +26,7 @@ import FinalizeFinance from './financeFinalization';
 import FinanceReport from './financeReportManager.js';
 import Addons from './Addons'
 import MakeOffer from './makeOffer'
-import CustomerViewContract from './CustomerViewContract'
+import CustomerViewContract from './Customer_View_Contract.js'
 import ManageOffers from './customerManageOffers';
 import ManageOffersManager from './managerManageOffers';
 import ContractPDF from './contract';
