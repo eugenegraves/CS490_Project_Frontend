@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Text, Box, Grid, Button, Image } from "@chakra-ui/react";
-import TestDriveForm from './TestDriveForm';
-import FinanceApp from './financeApp';
 import PageLoader from './pageLoader';
 import './App.css';
 
@@ -323,11 +321,6 @@ const redirectNotLoggedIn = (userData ) =>{
           <Grid templateRows="1fr 1fr" overflowY={"auto"}>
             <CarImagesLayout />
             <Options />
-            <Routes>
-              <Route path="/carDetails/*" element={<CarDetails />} />
-              <Route path="/carDetails/schedule-test-drive/" element={<TestDriveForm />} />
-              <Route path="/carDetails/financeApplication/*" element={<FinanceApp />} />
-            </Routes>
           </Grid>
         )}
       </>

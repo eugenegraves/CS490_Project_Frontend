@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Text, Heading, Box, Flex, Grid, Button, Image } from "@chakra-ui/react";
 import {flushSync, unstable_batchedUpdates} from 'react-dom';
 import axios from 'axios';

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import FinalizeFinance from "./financeFinalization";
 import './App.css';
 
 export default function FinanceApp () {
@@ -104,9 +103,6 @@ export default function FinanceApp () {
                       </center>
                   </form> 
               </div>
-              <Routes>
-                  <Route path="/finalizeFinance" element={<FinalizeFinance />} />
-              </Routes>
           </div>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Text, Box, Flex, Grid, Button, Input, Image } from "@chakra-ui/react";
 import axios from 'axios';
 
