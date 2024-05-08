@@ -2366,7 +2366,7 @@ const CustomerModifyInfo = ({setIsSignedIn}) => {
     social_security: userData?.social_security || '',
   });
 
-  const fetchBankInfo = async () => {
+  const fetchBankInfo = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:5000/get-customer-bank_info/${userData?.customer_id}`);
       if (!response.ok) {
@@ -2381,11 +2381,11 @@ const CustomerModifyInfo = ({setIsSignedIn}) => {
       console.error('Error:', error);
       //setLoading(false);
     }
-  };
+  }, [userData?.customer_id]);
 
   useEffect(() => {
     fetchBankInfo();
-  }, [userData?.customer_id, fetchBankInfo]);
+  }, [userData?.customer_id]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
