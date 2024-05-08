@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as useNavigate } from 'react-router-dom';
 import { Text, Heading, Box, Flex, Grid, Button, Image } from "@chakra-ui/react";
 import axios from 'axios';
@@ -14,21 +14,21 @@ export default function ManageOffers(){
     const navigate = useNavigate();
     // console.log(customer_id)
    
-    const fetchOffers =()=>{
-    axios.post('http://localhost:5000/fetchOffers',{customer_id,category} )
-    .then( (response) =>{
-        setFetchedData(response.data);
-        // console.log("data fetched", response.data)
-    }
-    )
-    .catch(error=>{
-        console.log("error message", error)
-    //    window.confirm('Something went wrong, please try again !');
-    });
-} 
+    const fetchOffers = useCallback(async () =>{
+        axios.post('http://localhost:5000/fetchOffers',{customer_id,category} )
+        .then( (response) =>{
+            setFetchedData(response.data);
+            // console.log("data fetched", response.data)
+        }
+        )
+        .catch(error=>{
+            console.log("error message", error)
+        //    window.confirm('Something went wrong, please try again !');
+        });
+    }, [customer_id, category]) 
     useEffect(()=>{
         fetchOffers();
-}, [category,status, fetchOffers]);
+}, [fetchOffers]);
 
 const acceptOffer =(customer_id,offer_id,car_id,offer_price,car_name,car_image)=>{
     axios.post('http://localhost:5000/acceptOffer',{customer_id,offer_id,car_id,offer_price,car_name,car_image} )
