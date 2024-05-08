@@ -9,7 +9,6 @@ import './App.css';
 export default function TestDriveForm() {
   const location = useLocation();
   const { userData, carInfos } = location.state;
-  const [error, setError] = useState('');
 
   const [EditMessage, setEditMessage] = useState('');
   
@@ -37,12 +36,9 @@ export default function TestDriveForm() {
           setEditMessage(null);
         }, 4000);
         resetForm();
-      } else {
-        setError('Failed to schedule test drive.');
       }
     } catch (error) {
       console.error('Error:', error);
-      setError('Failed to schedule test drive.');
     }
   };
   const resetForm = () => {
@@ -50,11 +46,6 @@ export default function TestDriveForm() {
     setDate('');
   };
 
-  const navigate = useNavigate();  
-
-const handleNavigate = (path) => {
-    navigate(path, { state: { userData } });
-  };
   return (
     <>
     

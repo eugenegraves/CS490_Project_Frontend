@@ -126,7 +126,7 @@ export default function FinalizeFinance () {
         }
     };
     
-    if (financeTerms.status == "approved") {
+    if (financeTerms.status === "approved") {
         return(
             <>
                 {loaderVisible && (

@@ -15,7 +15,7 @@ const handleNavigate = (path) => {
 console.log("loggegin",isSignedIn);
 return(
  <>
-{ (isSignedIn && location.pathname != '/homepage' && location.pathname != '/' && location.pathname != '/login')  &&(<>
+{ (isSignedIn && location.pathname !== '/homepage' && location.pathname !== '/' && location.pathname !== '/login')  &&(<>
   <Box zIndex="2" position="fixed"  left="0" top="0" w="100%">
     <nav className="navbar" >
       <ul className="nav-list">

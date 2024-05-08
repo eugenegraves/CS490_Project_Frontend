@@ -20,7 +20,7 @@ export default function FinanceLoader({ messages }) {
     setIsFinished(true);
     // Cleanup function to clear the interval when the component unmounts
     return () => clearInterval(intervalId);
-  }, [messages]); // Dependency array ensures effect runs only when messages change
+  }, [messages, currentMessageIndex]); // Dependency array ensures effect runs only when messages change
 
   return (
     <div id="progress-container">

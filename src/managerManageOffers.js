@@ -25,7 +25,7 @@ export default function ManageOffersManager(){
 } 
     useEffect(()=>{
         fetchOffers();
-}, [category,status]);
+}, [category,status, fetchOffers]);
 
 const acceptOffer =(customer_id,offer_id,car_id,offer_price,car_name,car_image)=>{
     axios.post('/acceptOffer',{customer_id,offer_id,car_id,offer_price,car_name,car_image} )

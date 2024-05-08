@@ -8,7 +8,6 @@ export default function FinanceApp () {
     const navigate = useNavigate();
     const location = useLocation();
     const { userData, carInfos } = location.state;
-    const [error, setError] = useState('');
     const [ income, setIncome ] = useState('');
     const [socialSecurity, setSocialSecurity] = useState(userData.social_security);
     const [ financeTerms, setFinanceTerms ] = useState({});
@@ -17,9 +16,6 @@ export default function FinanceApp () {
       window.scrollTo({ top: 0 });
     }, []);
 
-    
-
-    let finTerms = {};
 
     //useEffect(() => {
       //  console.log('financeTerms:', financeTerms);
@@ -47,9 +43,7 @@ export default function FinanceApp () {
               console.log("Response data: ", response.data);
               setFinanceTerms(response.data);
               console.log("State before navigation: ", { financeTerms, userData, carInfos });
-            } else {
-              setError('Failed to sent finance application');
-            }
+            } 
         } catch (error) {
             console.error('Error:', error);
         }
@@ -64,7 +58,7 @@ export default function FinanceApp () {
           state: { financeTerms, userData, carInfos },
         });
       }
-    }, [financeTerms, userData, carInfos]);
+    }, [financeTerms, userData, carInfos, navigate]);
     
     return (
           <div id="finAppBg">
