@@ -3093,13 +3093,7 @@ const Manager = () => {
   // const [carModels, setCarModels] = useState([]);
   // const [selectedModel, setSelectedModel] = useState("");
 
-  useEffect(() => {
-    if (showSalesReport) {
-      getSalesReport()
-    }
-  }, [showSalesReport, getSalesReport]);
-
-  const getSalesReport = async () => {
+  const getSalesReport = useCallback(async () => {
     try{
       const response = await axios.get('http://localhost:5000/getMonthlySales');
       console.log(response.data);
@@ -3111,7 +3105,13 @@ const Manager = () => {
     catch (error) {
       console.error(error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (showSalesReport) {
+      getSalesReport()
+    }
+  }, [showSalesReport, getSalesReport]);
 
   useEffect(() => {
     getSalesReport();
