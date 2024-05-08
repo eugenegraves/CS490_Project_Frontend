@@ -26,7 +26,7 @@ import FinalizeFinance from './financeFinalization';
 import FinanceReport from './financeReportManager.js';
 import Addons from './Addons'
 import MakeOffer from './makeOffer'
-import Customer_View_Contract from './Customer_View_Contract'
+import CustomerViewContract from './CustomerViewContract'
 import ManageOffers from './customerManageOffers';
 import ManageOffersManager from './managerManageOffers';
 import ContractPDF from './contract';
@@ -456,7 +456,7 @@ const CheckoutSuccess = () => {
     if (allCars.length > 0 ){
       sendPDF(userEmail);
     };
-  }, []);
+  }, [allCars.length, sendPDF, userEmail]);
 
   const [loaderVisible, setLoaderVisible] = useState(true);
 
@@ -509,8 +509,6 @@ const Checkout = () => {
   const customerSignature = location.state?.customerSignature;
   const allCars = location.state?.allCars;
   const userData = location.state?.userData;
-  const car_name = location.state?.car_name;
-  const car_id = location.state?.car_id;
 
   const totalPrice = location.state?.totalPrice;
   const [bankAccounts, setBankAccounts] = useState([]);
@@ -579,6 +577,7 @@ const Checkout = () => {
             customer_id: customer_id
         }),
       });
+      console.log(response2.data)
 
       const response3 = await fetch(`http://localhost:5000/checkout/${customer_id}`, {
         method: 'DELETE'
@@ -587,6 +586,7 @@ const Checkout = () => {
     } catch (error) {
       console.error('Error fetching cart items or removing them:', error);
     }
+    console.log(response3.data)
 
     console.log("Form is valid, processing payment...");
     navigate('/checkoutSuccess', { state: { userData,customerSignature,allCars } });
@@ -691,9 +691,8 @@ const Homepage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [allCars, setAllCars] = useState([]);
-  const [filteredCars, setFilteredCars] = useState([]);
+  const [filteredCars] = useState([]);
   const [searchParams, setSearchParams] = useState({});
-  const [message, setMessage] = useState('');
   const carsPerPage = 12;
 
   // useEffect to trigger fetchCars whenever currentPage or searchParams change
@@ -908,10 +907,6 @@ const SignedInHomepage = ({setIsSignedIn}) => {
     navigate('/ServiceHistory', { state: { userData } });
   };
 
-  const handleNavigateToCarAccessories = () => {
-    navigate('/CarAccessories', { state: { userData } });
-  };
-
   const handleNavigateToCart = () => {
     navigate('/Cart', { state: { userData } });
   };
@@ -930,7 +925,7 @@ const SignedInHomepage = ({setIsSignedIn}) => {
 
   useEffect(() => {
     fetchCars(); // Fetch based on the current state
-  }, [currentPage, searchParams]); 
+  }, [currentPage, searchParams, fetchCars]); 
 
   const fetchCars = async () => {
     let url = 'http://localhost:5000/cars_details';
@@ -975,17 +970,9 @@ const SignedInHomepage = ({setIsSignedIn}) => {
     setCurrentPage(1);    // reset page to 1
   };
 
-  const handleClickCart = () => {
-    const confirmed = window.confirm('You need to be logged in. Proceed to login?');
-    if (confirmed) {
-      window.location.href = '/login';
-    }
-  };
-
   const carsToDisplay = filteredCars.length > 0 ? filteredCars : allCars;
 
   // get the total number of pages based on the amount of filtered cars found
-  const totalFilteredPages = Math.ceil(filteredCars.length / carsPerPage);
 
   // splits the cars into appropriate rows (4 in this case)
   const rows = [];
@@ -1129,7 +1116,6 @@ const SignedInHomepage = ({setIsSignedIn}) => {
 const ContractView = () => {
   const location = useLocation();
   const userData = location.state?.userData;
-  const navigate = useNavigate();
   const [contracts, setContracts] = useState([]);
   const [ viewerOn, setViewerOn ] = useState(false);
   const [ currentContract, setCurrentContract ] = useState(0);
@@ -1164,8 +1150,6 @@ const ContractView = () => {
     console.log(contractDateTimestamp);
     const contractDate = new Date(contractDateTimestamp);
     console.log(contractDate.toISOString());
-    const isoString = contractDate.toISOString();
-    const dateString = isoString.substring(0, 10);
     
     let nextDueDate = new Date(contractDate.getFullYear(), contractDate.getMonth() + 1, contractDate.getDate());
     console.log(nextDueDate)
@@ -1178,29 +1162,6 @@ const ContractView = () => {
     return dateString2;
   };
 
-  const getPaymentHistory = () => {
-    const contract = contracts[currentContract];
-    const contractDate = new Date(contract.contract_date);
-    const today = new Date();
-
-    // Calculate the number of months passed since the contract date (including current month)
-    const monthsPassed = today.getMonth() - contractDate.getMonth() + (today.getFullYear() - contractDate.getFullYear()) * 12 + 1;
-
-    // Create an empty array to store payment history objects
-    const paymentHistory = [];
-
-    // Loop through the number of months passed and create fake payment data
-    for (let i = 0; i < Math.min(monthsPassed, 2); i++) { // Limit history to 2 months
-      const paymentDate = new Date(contractDate.getFullYear(), contractDate.getMonth() + i, contractDate.getDate());
-      paymentHistory.push({
-        paymentMethod: "bank account",
-        paymentDate: paymentDate.toLocaleDateString(),
-        amount: contract.monthly_payment_amount,
-      });
-    }
-
-    return paymentHistory;
-  };
 
 const Pdf = (index) => {
   setCurrentContract(index);
@@ -1255,7 +1216,7 @@ const goBack = () => {
       <br></br>
       <br></br>
       <PDFViewer id="customerContract" width="900px" height="600px">
-        <Customer_View_Contract contract={contracts[currentContract]} />
+        <CustomerViewContract contract={contracts[currentContract]} />
       </PDFViewer>
       <br></br>
       <br></br>
@@ -1291,11 +1252,7 @@ const TestDriveHistory = () => {
 
   useEffect(() => {
     fetchTestDriveHistory();
-  }, [userData]);
-
-  const handleNavigate = (path) => {
-    navigate(path, { state: { userData } });
-  };
+  }, [userData, fetchTestDriveHistory]);
 
   return (
     <>
@@ -1433,10 +1390,6 @@ const OwnCar = () => {
       });
   };
 
-  const handleNavigate = (path) => {
-    navigate(path, { state: { userData } });
-  };
-
   return (
     <>
    
@@ -1549,13 +1502,9 @@ const ServiceHistory = () => {
 
   useEffect(() => {
     fetchServiceHistory();
-  }, [userData]);
+  }, [userData, fetchServiceHistory]);
 
-  const navigate = useNavigate();  
-
-  const handleNavigate = (path) => {
-    navigate(path, { state: { userData } });
-  };
+  const navigate = useNavigate();
 
   return (
     <>
@@ -1615,10 +1564,8 @@ const CustomerCart = () => {
   const customer_id = userData?.customer_id;
   const car_name = location.state?.car_name;
   const car_id = location.state?.car_id;
-  const car_price = location.state?.car_price;
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [allCars, setAllCars] = useState([]);
   const [showContract, setShowContract] = useState(null);
@@ -1631,7 +1578,7 @@ const CustomerCart = () => {
 
   useEffect(() => {
     fetchCartItems(userData?.customer_id);
-  }, [userData]);
+  }, [userData, fetchCartItems]);
 
   const fetchCartItems = async (customerId) => {
     try {
@@ -1646,11 +1593,9 @@ const CustomerCart = () => {
         setAllCars(data.allCars);
       }
       setCartItems(data.cart_items);
-      setError(null);
       calculateTotalPrice(data.cart_items);
     } catch (error) {
       console.error('Error fetching cart items:', error);
-      setError('Error fetching cart items. Please try again later.');
     }
   };
 console.log("allcars", allCars);
@@ -1669,13 +1614,12 @@ console.log("allcars", allCars);
         throw new Error('Failed to remove item from cart');
       }
       if(car_id && (service_package_id ===null)){
-      setAllCars(allCars.filter((prev)=>prev.car_id != car_id));
+      setAllCars(allCars.filter((prev)=>prev.car_id !== car_id));
       }
       setCartItems(prevCartItems => prevCartItems.filter(item => item.car_id && service_package_id ===null? item.car_id !== car_id :item.cart_id !== cartId ) );
       calculateTotalPrice(cartItems.filter(item => item.car_id && service_package_id===null? item.car_id !== car_id :item.cart_id !== cartId ));
     } catch (error) {
       console.error('Error removing item from cart:', error);
-      setError('Error removing item from cart. Please try again later.');
     }
   };
   const handleImageClick = (imageSrc) => {
@@ -2095,27 +2039,6 @@ const CarAccessories = () => {
       const data = await response.json();
       console.log("data collect", data)
       setAccessories(data);
-    } catch (error) {
-      console.error('Error fetching accessories:', error);
-    }
-  };
-
-  const handleDeleteAccessory = async (accessoryID) => {
-    console.log("the ID recieved: ", accessoryID) // testing that we recieved the accessory_id to be deleted
-    try {
-      const response = await fetch(`http://localhost:5000/deleteAccessory`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ accessoryID }),
-      });
-      const data = await response.json();
-      console.log("data collect", data)
-      // If deletion was successful, refetch the accessories data
-      if (response.ok) {
-        fetchAccessories(selectedCategory);
-      }
     } catch (error) {
       console.error('Error fetching accessories:', error);
     }
