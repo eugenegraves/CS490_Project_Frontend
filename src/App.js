@@ -436,7 +436,7 @@ const CheckoutSuccess = () => {
   const userEmail = userData.email;
   console.log("dfghjkl",userEmail);
   
-  const sendPDF = async (userEmail) => {
+  const sendPDF = useCallback(async (userEmail) => {
     const blob = await pdf(
       <ContractPDF isPaided={true} customerSignature={customerSignature} allCars={allCars} userData={userData} />
     ).toBlob();
@@ -450,7 +450,7 @@ const CheckoutSuccess = () => {
       .catch(error => {
         console.log('Error sending contract:', error);
       });
-  };
+  }, []);
   
   useEffect(() => {
     if (allCars.length > 0 ){
@@ -695,12 +695,7 @@ const Homepage = () => {
   const [searchParams, setSearchParams] = useState({});
   const carsPerPage = 12;
 
-  // useEffect to trigger fetchCars whenever currentPage or searchParams change
-  useEffect(() => {
-    fetchCars(); // Fetch based on the current state
-  }, [currentPage, searchParams]); 
-
-  const fetchCars = async () => {
+  const fetchCars = useCallback(async () => {
     let url = 'http://localhost:5000/cars_details';
     let data;
   
@@ -725,7 +720,12 @@ const Homepage = () => {
       handleSearch({ make: '', model: '', color: '', budget: '' });
     } else {   // if cars found after error message, set error message to blank
     }
-  };
+  }, [currentPage, searchParams]);
+
+  // useEffect to trigger fetchCars whenever currentPage or searchParams change
+  useEffect(() => {
+    fetchCars(); // Fetch based on the current state
+  }, [fetchCars]); 
 
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -760,7 +760,7 @@ const Homepage = () => {
   const headerHeight = 400; // Adjust this based on your actual header's height
   const footerHeight = 100; // Adjust this based on your actual footer's height
   const viewportHeight = window.innerHeight;
-  const minContentHeight = `${viewportHeight - headerHeight - footerHeight}px`;
+  //const minContentHeight = `${viewportHeight - headerHeight - footerHeight}px`;
 
   return (
     <>
@@ -877,9 +877,9 @@ const SignedInHomepage = ({setIsSignedIn}) => {
   const [currentPage, setCurrentPage] = useState(1);      // use states for pagination, set the current page
   const [totalPages, setTotalPages] = useState(1);        // use states for total number of pages
   const [allCars, setAllCars] = useState([]);             // use state for updating car data
-  const [filteredCars, setFilteredCars] = useState([]);
+  const [filteredCars] = useState([]);
   const [searchParams, setSearchParams] = useState({});
-  const [message, setMessage] = useState('');
+  //const [message, setMessage] = useState('');
   const carsPerPage = 12;
 
 
@@ -922,11 +922,7 @@ const SignedInHomepage = ({setIsSignedIn}) => {
     navigate('/contract', { state: { userData } });
   };
 
-  useEffect(() => {
-    fetchCars(); // Fetch based on the current state
-  }, [currentPage, searchParams, fetchCars]); 
-
-  const fetchCars = async () => {
+  const fetchCars = useCallback(async () => {
     let url = 'http://localhost:5000/cars_details';
     let data;
   
@@ -949,10 +945,14 @@ const SignedInHomepage = ({setIsSignedIn}) => {
     if (data.cars.length === 0) {
       alert("Sorry, no cars found with those filters")  // if no cars found, show this
       handleSearch({ make: '', model: '', color: '', budget: '' });
-    } else {
+    } /*else {
       setMessage('');   // if cars found after error message, set error message to blank
-    }
-  };
+    }*/
+  }, [currentPage, searchParams]);
+
+  useEffect(() => {
+    fetchCars(); // Fetch based on the current state
+  }, [fetchCars]); 
 
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -1592,7 +1592,7 @@ const CustomerCart = () => {
     } catch (error) {
       console.error('Error fetching cart items:', error);
     }
-  }, [userData]);
+  }, []);
 
   useEffect(() => {
     fetchCartItems(userData?.customer_id);
