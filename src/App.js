@@ -1,11 +1,11 @@
 // import necessary libraries
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import Tilt from 'react-vanilla-tilt';
 import { ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter as Router, Route, Routes, Link, useParams, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import {
-  Center,Text, Heading, Box, HStack, Flex, Button, Input, Td, Tr, Tbody, Table, Th, Thead, FormControl, Alert, FormLabel,
-  AlertIcon, VStack, Menu, MenuItem, MenuList, MenuButton, Icon, Select, Stack, Image, Modal, FormErrorMessage,
+  Center,Text, Heading, Box, Flex, Button, Input, Td, Tr, Tbody, Table, Th, Thead, FormControl, FormLabel,
+  VStack, Menu, MenuItem, MenuList, MenuButton, Icon, Select, Image, Modal, FormErrorMessage,
   ModalOverlay,
   ModalContent,
   ModalHeader,
@@ -13,7 +13,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { FaTimes, FaCheck, FaChevronDown, FaPhone, FaEnvelope, FaFolderOpen, FaShoppingCart } from 'react-icons/fa';
+import { FaChevronDown, FaPhone, FaEnvelope, FaFolderOpen, FaShoppingCart } from 'react-icons/fa';
 import { PDFViewer, pdf } from '@react-pdf/renderer';
 import axios from 'axios';
 import './App.css';
@@ -24,7 +24,6 @@ import TestDriveForm from './TestDriveForm';
 import FinanceApp from './financeApp';
 import FinalizeFinance from './financeFinalization';
 import FinanceReport from './financeReportManager.js';
-import ReactDOMServer from 'react-dom/server';
 import Addons from './Addons'
 import MakeOffer from './makeOffer'
 import Customer_View_Contract from './Customer_View_Contract'
@@ -33,15 +32,9 @@ import ManageOffersManager from './managerManageOffers';
 import ContractPDF from './contract';
 import SalesReport from './salesReport';
 import CheckoutLoader from './checkoutLoader.js';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './img/logo.png'
 
-import { Document, Page, View, StyleSheet } from '@react-pdf/renderer';
-import { use } from 'chai';
+import '@react-pdf/renderer';
 export const UserContext = createContext();
 //import CarAccessories from './carAccessories';
 // npm install react-bootstrap bootstrap

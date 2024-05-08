@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PDFViewer } from '@react-pdf/renderer';
-import { BrowserRouter as Router, Route, Routes, Link, useParams, useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import { BrowserRouter as useNavigate, useLocation } from 'react-router-dom';
 import FinanceAgreementPDF from './financeAgreementPDF';
 import FinanceLoader from "./financeLoader";
 import './App.css';

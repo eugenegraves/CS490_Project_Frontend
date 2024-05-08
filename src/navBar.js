@@ -1,8 +1,5 @@
-import { BrowserRouter as Router, Route, Routes, Link, useParams, useNavigate, useLocation } from 'react-router-dom';
-import {
-  Center, Text, Heading, Box, HStack, Flex, Grid, Button, Input, Td, Tr, Tbody, Table, Th, Thead, FormControl, Alert, FormLabel,
-  AlertIcon, VStack, Menu, MenuItem, MenuList, MenuButton, Icon, Image
-} from "@chakra-ui/react";
+import { BrowserRouter as useNavigate, useLocation } from 'react-router-dom';
+import { Box } from "@chakra-ui/react";
 
 
 export default function NavBar({isSignedIn}){

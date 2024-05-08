@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, Link, useParams, useNavigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import FinalizeFinance from "./financeFinalization";
 import './App.css';
