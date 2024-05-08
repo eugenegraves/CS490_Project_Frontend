@@ -15,17 +15,11 @@ jobs:
         with:
           node-version: 16
 
-      - name: Clear Cache (Optional)
-        uses: actions/cache@v3  # Added to clear cache before install
-        with:
-          path: []  # Empty path to disable caching
-          key: ${{ runner.os }}-build-${{ hashFiles('**/package*.json') }}  # Cache key based on package.json changes
-
       - name: Install dependencies
         run: npm install
 
-      - name: Build with verbose output (Optional)
-        run: npm run build --verbose  # Added --verbose flag for debugging
+      - name: Build
+        run: npm run build
 
       - name: Run tests
         run: npm test
