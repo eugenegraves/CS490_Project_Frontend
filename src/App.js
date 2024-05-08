@@ -4429,12 +4429,6 @@ const Technician = () => {
   const [serviceDetails, setServiceDetails] = useState(null);
   const [report, setReport] = useState('');
   const [isReportSubmitted, setIsReportSubmitted] = useState(false);
-  
-  useEffect(() => {
-    if (showAssignedServices) {
-      fetchAssignedServices();
-    }
-  }, [showAssignedServices, fetchAssignedServices]);
 
 
 
@@ -4508,6 +4502,12 @@ const sendSubmitReport = (reportValue, statusValue, service_request_id ,assigned
         console.error('Error fetching assigned services:', error);
       });
   }, [userData.technicians_id]);
+
+  useEffect(() => {
+    if (showAssignedServices) {
+      fetchAssignedServices();
+    }
+  }, [showAssignedServices, fetchAssignedServices]);
 
   const handleSignOut = () => {
     localStorage.removeItem('accessToken');
