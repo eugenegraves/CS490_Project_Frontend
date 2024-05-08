@@ -4160,6 +4160,7 @@ const Admin = () => {
           password: ''
         });
         setAccountCreationSuccess(true); // Set account creation success state to True
+        console.log(accountCreationSuccess)
 
         setTimeout(() => {
           setAccountCreationSuccess(false); // Hide the success message after 3 seconds
@@ -4209,18 +4210,18 @@ const Admin = () => {
     navigate('/', { replace: true });
   };
 
-  const handleCreateTechnician = () => {
+  /*const handleCreateTechnician = () => {
     setShowTechnicianForm(true);
-  };
+  };*/
 
   // ensures that when a button is clicked, only the relevant information of that button is shown
-  const handleButtonClick = (section) => {
+  /*const handleButtonClick = (section) => {
     switch (section) {
       case 'createTechnician':
         setShowTechnicianForm(true);
         break;
     }
-  };
+  };*/
 
   return (
     <>
@@ -4433,7 +4434,7 @@ const Technician = () => {
     if (showAssignedServices) {
       fetchAssignedServices();
     }
-  }, [showAssignedServices]);
+  }, [showAssignedServices, fetchAssignedServices]);
 
 
 
@@ -4455,6 +4456,7 @@ const Technician = () => {
         setServiceDetails(details);
         setShowAssignedServices(false);
         setDetailsModal(true);
+        console.log(detailsModal);
     } catch (error) {
         // Handle errors if any
         console.error('Error fetching service details:', error);
